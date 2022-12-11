@@ -1,17 +1,17 @@
-Flet basic carousel
+# Flet basic carousel sliders
 
-This project is a slideshow pack with different types for the Flat framework. This project is under development, so in
+This project is a carousel sliders pack with different types for the Flat framework. This project is under development, so in
 the future, different types of slideshow will be added to the project.
 
 # How to use
 
-there are some types of slideshows, so in the following, we will explain each type of slideshow.
+there are some types of sliders, so in the following, we will explain each type of them.
 
 ### FletCarouselOne
 
-This type of slideshow is the basic one. This type is horizontal and there are two buttons to control slides.
+This type of slider is the basic one. This type is horizontal and there are two buttons to control slides.
 
-![Screenshot of the app](H:\project\python_projects\flet_dep_developing\FletCarousel\screenshot1.png "Screenshot")
+![Screenshot of the app](screenshot1.png "Screenshot")
 
 for example:
 
@@ -53,9 +53,9 @@ the main page
 
 #### Container properties
 
-1. ``width`` : slideshow width
+1. ``width`` : slider width
 
-2. ``height`` :slideshow height
+2. ``height`` :slider height
 
 3. ``expand`` : filling available space
 
@@ -77,7 +77,7 @@ the main page
 
 12. ``border_radius`` : border_radius
 
-#### Slideshow properties
+#### Slider properties
 
 1. ``items`` : the items that you want to be in slide show
 
@@ -91,7 +91,7 @@ the main page
 
 6. ``auto_cycle`` : auto cycleing (Auto changing slides)
 
-7. ``buttons`` : the list of slideshow buttons that must be two buttons! the first one is the "previous" button and the second is the "next" button
+7. ``buttons`` : the list of Slider's buttons that must be two buttons! the first one is the "previous" button and the second is the "next" button
 
 #### Methods
 
