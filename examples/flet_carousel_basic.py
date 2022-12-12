@@ -1,6 +1,6 @@
 from flet import *
 
-from FletCarouselOne import FletCarouselOne, AutoCycle
+from fletcarousel.basic import BasicHorizontalCarousel
 
 
 def main(page: Page):
@@ -8,7 +8,7 @@ def main(page: Page):
     page.rtl = True
     page.vertical_alignment = 'center'
     page.horizontal_alignment = 'center'
-    carousel = FletCarouselOne(
+    carousel = BasicHorizontalCarousel(
         page=page,
         items_count=3,
         # auto_cycle=AutoCycle(duration=1),

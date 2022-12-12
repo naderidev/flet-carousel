@@ -4,8 +4,7 @@ from flet.border import Border
 from flet.control import OptionalNumber
 from flet.gradients import Gradient
 from flet.types import PaddingValue, MarginValue, BorderRadiusValue
-
-from FletCarousel import FletCarousel
+from fletcarousel.fletcarousel import FletCarousel
 
 
 class AutoCycle:
@@ -15,7 +14,7 @@ class AutoCycle:
         self.duration = duration
 
 
-class FletCarouselOne(FletCarousel):
+class BasicHorizontalCarousel(FletCarousel):
     current_items: tuple = 0, 0
 
     def __init__(
@@ -73,7 +72,7 @@ class FletCarouselOne(FletCarousel):
 
         self.__update_buttons()
 
-    def build(self) -> Container:
+    def render(self) -> Row:
 
         self.__carousel = Row(
             controls=self.__controls(self.items),
@@ -81,23 +80,7 @@ class FletCarouselOne(FletCarousel):
             alignment=MainAxisAlignment.SPACE_AROUND
         )
 
-        return Container(
-            width=self.width,
-            height=self.height,
-            expand=self.expand,
-            tooltip=self.tooltip,
-            visible=self.visible,
-            disabled=self.disabled,
-            padding=self.padding,
-            margin=self.margin,
-            alignment=self.alignment,
-            bgcolor=self.bgcolor,
-            gradient=self.gradient,
-            border=self.border,
-            border_radius=self.border_radius,
-            clip_behavior=ClipBehavior.HARD_EDGE,
-            content=self.__carousel
-        )
+        return self.__carousel
 
     def __controls(self, items: Optional[list[Control]] = None):
 
