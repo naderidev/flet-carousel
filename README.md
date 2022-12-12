@@ -110,7 +110,7 @@ check out the file ``examples/flet_carousel_basic.py``
 
 This type of slider works with AnimatedSwitcher and unlike "BasicHorizontalCarousel" has no next and prev button but has hint lines.
 
-![Screenshot of the app](screenshot1.png "Screenshot")
+![Screenshot of the app](screenshot2.png "Screenshot")
 
 for example:
 
