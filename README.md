@@ -123,7 +123,7 @@ BasicAnimatedHorizontalCarousel(
     hint_lines=HintLine(
         active_color='red',
         inactive_color='white',
-        alignment=alignment.center,
+        alignment=MainAxisAlignment.CENTER,
         max_list_size=400
     ),
     items=[
