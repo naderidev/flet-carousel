@@ -260,8 +260,8 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
             while 1:
                 time.sleep(self.auto_cycle.duration)
                 self.next()
-                if self.current_item == len(self.items):
-                    self.current_item = 0
+                if int(self.current_item + 1) == len(self.items):
+                    time.sleep(self.auto_cycle.duration)
                     self.go(0)
 
     def update_items(self, new_items: Optional[list[Control]] = None):
