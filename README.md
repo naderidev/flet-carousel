@@ -189,7 +189,7 @@ the main page
 
 3. ``update_items`` :  updating items
 
-4. ``go`` :  go to a specific slider
+4. ``go`` :  go to a specific slide
  
 check out the file ``examples/animated_horizontal_basic.py``
 
