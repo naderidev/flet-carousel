@@ -150,7 +150,7 @@ class BasicHorizontalCarousel(FletCarousel):
 class HintLine(BaseModel):
     active_color: Optional[str]
     inactive_color: Optional[str]
-    alignment: Optional[Alignment]
+    alignment: Optional[MainAxisAlignment]
     max_list_size: Optional[int]
 
 
@@ -203,31 +203,32 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
         self.auto_cycle = auto_cycle
         self.hint_lines = hint_lines
         self.animated_swicher = animated_swicher
-        if animated_swicher:
+        if animated_swicher and self.items:
             self.animated_swicher.content = self.items[0] if items else Container()
 
     def render(self) -> Control:
 
-        self.__hint_lines_element = Row(
-            controls=[
-                Container(
-                    bgcolor=self.hint_lines.active_color if i == 0 else self.hint_lines.inactive_color,
-                    border_radius=20,
-                    width=int(self.hint_lines.max_list_size / len(self.items)),
-                    height=5,
-                    on_click=lambda e, i=i: self.go(i)
-                ) for i in range(len(self.items))
-            ] if self.hint_lines else [],
-            vertical_alignment=CrossAxisAlignment.CENTER,
-            alignment=MainAxisAlignment.CENTER,
-            spacing=10
-        )
+        _controls = [self.animated_swicher]
+
+        if self.hint_lines:
+            self.__hint_lines_element = Row(
+                controls=[
+                    Container(
+                        bgcolor=self.hint_lines.active_color if i == 0 else self.hint_lines.inactive_color,
+                        border_radius=20,
+                        width=int(self.hint_lines.max_list_size / len(self.items)),
+                        height=5,
+                        on_click=lambda e, i=i: self.go(i)
+                    ) for i in range(len(self.items))
+                ],
+                vertical_alignment=CrossAxisAlignment.CENTER,
+                alignment=self.hint_lines.alignment,
+                spacing=10
+            )
+            _controls.append(self.__hint_lines_element)
 
         return Column(
-            [
-                self.animated_swicher,
-                self.__hint_lines_element
-            ],
+            _controls,
             spacing=20
         )
 
