@@ -235,7 +235,7 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
         if self.current_item < len(self.items):
             self.go(self.current_item + 1)
 
-    def perv(self, e=None):
+    def prev(self, e=None):
         if self.current_item > 0:
             self.go(self.current_item - 1)
 

@@ -1,22 +1,22 @@
-Flet basic carousel
+# Flet simple carousel sliders
 
-This project is a slideshow pack with different types for the Flet framework. This project is under development, so in
-the future, different types of slideshow will be added to the project.
+This project is a carousel sliders pack with different types for the Flet framework. This project is under development, so in
+the future, different types of sliders will be added to the project.
 
 # How to use
 
-there are some types of slideshows, so in the following, we will explain each type of slideshow.
+There are some types of sliders, so in the following, we will explain each type of them.
 
 ### FletCarouselOne
 
-This type of slideshow is the basic one. This type is horizontal and there are two buttons to control slides.
+This type of slider is the basic one. This type is horizontal and there are two buttons to control slides.
 
-![Screenshot of the app](H:\project\python_projects\flet_dep_developing\FletCarousel\screenshot1.png "Screenshot")
+![Screenshot of the app](screenshot1.png "Screenshot")
 
 for example:
 
 ````python
-FletCarouselOne(
+BasicHorizontalCarousel(
     page=page,
     items_count=3,
     # auto_cycle=AutoCycle(duration=1),
@@ -53,9 +53,9 @@ the main page
 
 #### Container properties
 
-1. ``width`` : slideshow width
+1. ``width`` : slider width
 
-2. ``height`` :slideshow height
+2. ``height`` :slider height
 
 3. ``expand`` : filling available space
 
@@ -77,7 +77,7 @@ the main page
 
 12. ``border_radius`` : border_radius
 
-#### Slideshow properties
+#### Slider properties
 
 1. ``items`` : the items that you want to be in slide show
 
@@ -91,7 +91,7 @@ the main page
 
 6. ``auto_cycle`` : auto cycleing (Auto changing slides)
 
-7. ``buttons`` : the list of slideshow buttons that must be two buttons! the first one is the "previous" button and the second is the "next" button
+7. ``buttons`` : the list of Slider's buttons that must be two buttons! the first one is the "previous" button and the second is the "next" button
 
 #### Methods
 
@@ -105,5 +105,92 @@ the main page
  
 check out the file ``examples/flet_carousel_basic.py``
 
-Hope to enjoy :)
 
+### BasicAnimatedHorizontalCarousel
+
+This type of slider works with AnimatedSwitcher and unlike "BasicHorizontalCarousel" has no next and prev button but has hint lines.
+
+![Screenshot of the app](screenshot1.png "Screenshot")
+
+for example:
+
+````python
+BasicAnimatedHorizontalCarousel(
+    page=page,
+    auto_cycle=AutoCycle(duration=2),
+    expand=True,
+    padding=50,
+    hint_lines=HintLine(
+        active_color='red',
+        inactive_color='white',
+        alignment=alignment.center,
+        max_list_size=400
+    ),
+    items=[
+        Container(
+            content=Text(value=str(i), size=30),
+            height=400,
+            expand=True,
+            bgcolor='red',
+            border_radius=15,
+            alignment=alignment.center,
+        ) for i in range(10)
+    ],
+)
+````
+
+### Properties
+
+``page``
+
+the main page
+
+#### Container properties
+
+1. ``width`` : slider width
+
+2. ``height`` :slider height
+
+3. ``expand`` : filling available space
+
+4. ``tooltip`` : tooltip
+
+5. ``disabled`` : disabled
+
+6. ``padding`` : padding
+
+7. ``margin`` : margin
+
+8. ``alignment`` : alignment
+
+9. ``bgcolor`` : background color
+
+10. ``gradient`` : gradient
+
+11. ``border`` : border
+
+12. ``border_radius`` : border_radius
+
+#### Slider properties
+
+1. ``items`` : the items that you want to be in slider
+
+2. ``hint_lines`` : hint lines settings
+
+3. ``animated_swicher`` : The AnimatedSwitcher settings
+
+4. ``auto_cycle`` : auto cycleing (Auto changing slides)
+
+#### Methods
+
+1. ``next`` : next slide
+
+2. ``prev`` :  previous slide
+
+3. ``update_items`` :  updating items
+
+4. ``go`` :  go to a specific slider
+ 
+check out the file ``examples/animated_horizontal_basic.py``
+
+Hope to enjoy :)
