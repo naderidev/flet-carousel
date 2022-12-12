@@ -7,7 +7,7 @@ the future, different types of sliders will be added to the project.
 
 There are some types of sliders, so in the following, we will explain each type of them.
 
-### FletCarouselOne
+### BasicHorizontalCarousel
 
 This type of slider is the basic one. This type is horizontal and there are two buttons to control slides.
 
