@@ -5,6 +5,7 @@ from flet.control import OptionalNumber
 from flet.gradients import Gradient
 from flet.types import PaddingValue, MarginValue, BorderRadiusValue
 from fletcarousel.fletcarousel import FletCarousel
+from pydantic import BaseModel
 
 
 class AutoCycle:
@@ -141,6 +142,130 @@ class BasicHorizontalCarousel(FletCarousel):
                 self.next()
                 if self.current_items[1] == len(self.items):
                     self.current_items = (0, self.items_count)
+
+    def init_state(self):
+        self.__auto_cycle()
+
+
+class HintLine(BaseModel):
+    active_color: Optional[str]
+    inactive_color: Optional[str]
+    alignment: Optional[Alignment]
+    max_list_size: Optional[int]
+
+
+class BasicAnimatedHorizontalCarousel(FletCarousel):
+    current_item: int = 0
+
+    def __init__(
+            self,
+            page: Page,
+            items: Optional[list[Control]] = None,
+            width: OptionalNumber = None,
+            height: OptionalNumber = None,
+            expand: Union[None, bool, int] = None,
+            tooltip: Optional[str] = None,
+            visible: Optional[bool] = None,
+            disabled: Optional[bool] = None,
+            padding: PaddingValue = None,
+            margin: MarginValue = None, alignment: Optional[Alignment] = None,
+            bgcolor: Optional[str] = None,
+            gradient: Optional[Gradient] = None, border: Optional[Border] = None,
+            border_radius: BorderRadiusValue = None,
+            auto_cycle: AutoCycle = None,
+            hint_lines: Optional[HintLine] = False,
+            animated_swicher: Optional[AnimatedSwitcher] = AnimatedSwitcher(
+                transition=AnimatedSwitcherTransition.SCALE,
+                duration=500, reverse_duration=100,
+                switch_in_curve=AnimationCurve.BOUNCE_OUT,
+                switch_out_curve=AnimationCurve.BOUNCE_IN
+            )
+    ):
+        FletCarousel.__init__(
+            self,
+            page=page,
+            width=width,
+            height=height,
+            expand=expand,
+            tooltip=tooltip,
+            visible=visible,
+            disabled=disabled,
+            padding=padding,
+            margin=margin,
+            alignment=alignment,
+            bgcolor=bgcolor,
+            gradient=gradient,
+            border=border,
+            border_radius=border_radius,
+        )
+
+        self.items = items
+        self.auto_cycle = auto_cycle
+        self.hint_lines = hint_lines
+        self.animated_swicher = animated_swicher
+        if animated_swicher:
+            self.animated_swicher.content = self.items[0] if items else Container()
+
+    def render(self) -> Control:
+
+        self.__hint_lines_element = Row(
+            controls=[
+                Container(
+                    bgcolor=self.hint_lines.active_color if i == 0 else self.hint_lines.inactive_color,
+                    border_radius=20,
+                    width=int(self.hint_lines.max_list_size / len(self.items)),
+                    height=5,
+                    on_click=lambda e, i=i: self.go(i)
+                ) for i in range(len(self.items))
+            ] if self.hint_lines else [],
+            vertical_alignment=CrossAxisAlignment.CENTER,
+            alignment=MainAxisAlignment.CENTER,
+            spacing=10
+        )
+
+        return Column(
+            [
+                self.animated_swicher,
+                self.__hint_lines_element
+            ],
+            spacing=20
+        )
+
+    def next(self, e=None):
+        if self.current_item < len(self.items):
+            self.go(self.current_item + 1)
+
+    def perv(self, e=None):
+        if self.current_item > 0:
+            self.go(self.current_item - 1)
+
+    def go(self, index: int):
+        if index in range(len(self.items)):
+            self.current_item = index
+            self.animated_swicher.content = self.items[self.current_item]
+            self.animated_swicher.update()
+
+            if self.hint_lines:
+
+                for c in self.__hint_lines_element.controls:
+                    c.bgcolor = self.hint_lines.inactive_color
+
+                self.__hint_lines_element.controls[self.current_item].bgcolor = self.hint_lines.active_color
+                self.__hint_lines_element.update()
+
+    def __auto_cycle(self):
+        if self.items and self.auto_cycle:
+            self.current_item = 0
+            while 1:
+                time.sleep(self.auto_cycle.duration)
+                self.next()
+                if self.current_item == len(self.items):
+                    self.current_item = 0
+                    self.go(0)
+
+    def update_items(self, new_items: Optional[list[Control]] = None):
+        self.items = new_items
+        self.go(0)
 
     def init_state(self):
         self.__auto_cycle()
