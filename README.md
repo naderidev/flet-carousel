@@ -11,7 +11,7 @@ There are some types of sliders, so in the following, we will explain each type 
 
 This type of slider is the basic one. This type is horizontal and there are two buttons to control slides.
 
-![Screenshot of the app](screenshot1.png "Screenshot")
+![Screenshot of the app](https://raw.githubusercontent.com/naderidev/flet-carousel/master/screenshot1.png "Screenshot")
 
 for example:
 
@@ -110,7 +110,7 @@ check out the file ``examples/flet_carousel_basic.py``
 
 This type of slider works with AnimatedSwitcher and unlike "BasicHorizontalCarousel" has no next and prev button but has hint lines.
 
-![Screenshot of the app](screenshot2.png "Screenshot")
+![Screenshot of the app](https://raw.githubusercontent.com/naderidev/flet-carousel/master/screenshot2.png "Screenshot")
 
 for example:
 

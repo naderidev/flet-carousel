@@ -1,6 +1,6 @@
 from flet import *
 
-from fletcarousel.basic.horizontal import BasicHorizontalCarousel
+from fletcarousel.horizontal import BasicHorizontalCarousel
 
 
 def main(page: Page):
