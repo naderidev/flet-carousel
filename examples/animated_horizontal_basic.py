@@ -1,5 +1,5 @@
 from flet import *
-from fletcarousel.horizontal import BasicAnimatedHorizontalCarousel, HintLine, AutoCycle
+from fletcarousel import BasicAnimatedHorizontalCarousel, HintLine, AutoCycle
 
 
 def main(page: Page):
