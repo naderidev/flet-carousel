@@ -5,5 +5,3 @@ from fletcarousel.horizontal import (
     AutoCycle,
     HintLine
 )
-
-__version__ = '0.0.3'

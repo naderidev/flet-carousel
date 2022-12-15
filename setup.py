@@ -5,6 +5,8 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setuptools.setup(
     name='fletcarousel',
+    version='0.0.3',
+    license='LICENSE',
     author='naderidev',
     author_email='mohammadrezanaderi84@gmail.com',
     description='Simple carousel sliders for flet framework',
@@ -22,7 +24,4 @@ setuptools.setup(
         'License :: OSI Approved :: MIT License',
     ],
     python_requires='>=3.9',
-    install_requires=[
-        'flet'
-    ],
 )
