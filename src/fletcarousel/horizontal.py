@@ -4,7 +4,7 @@ from flet.border import Border
 from flet.control import OptionalNumber
 from flet.gradients import Gradient
 from flet.types import PaddingValue, MarginValue, BorderRadiusValue
-from src.fletcarousel import FletCarousel
+from fletcarousel import FletCarousel
 from pydantic import BaseModel
 
 
