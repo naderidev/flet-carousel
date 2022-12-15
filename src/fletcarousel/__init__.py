@@ -1,5 +1,4 @@
-from fletcarousel.fletcarousel import FletCarousel
-from fletcarousel.horizontal import (
+from src.fletcarousel.horizontal import (
     BasicAnimatedHorizontalCarousel,
     BasicHorizontalCarousel,
     AutoCycle,

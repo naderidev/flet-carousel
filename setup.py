@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setuptools.setup(
     name='fletcarousel',
-    version='0.0.3',
+    version='0.0.5',
     license='LICENSE',
     author='naderidev',
     author_email='mohammadrezanaderi84@gmail.com',
@@ -14,8 +14,8 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/naderidev/flet-carousel',
-    package_dir={'': 'fletcarousel'},
-    packages=setuptools.find_packages(where='fletcarousel'),
+    package_dir={'': 'src'},
+    packages=setuptools.find_packages(where='src'),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -24,4 +24,5 @@ setuptools.setup(
         'License :: OSI Approved :: MIT License',
     ],
     python_requires='>=3.9',
+    include_package_data=True,
 )
