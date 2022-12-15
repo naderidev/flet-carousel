@@ -17,7 +17,7 @@ git clone https://github.com/naderidev/flet-carousel
 
 There are some types of sliders, so in the following, we will explain each type of them.
 
-### FletCarouselOne
+### BasicHorizontalCarousel
 
 This type of slider is the basic one. This type is horizontal and there are two buttons to control slides.
 
@@ -133,7 +133,7 @@ BasicAnimatedHorizontalCarousel(
     hint_lines=HintLine(
         active_color='red',
         inactive_color='white',
-        alignment=alignment.center,
+        alignment=MainAxisAlignment.CENTER,
         max_list_size=400
     ),
     items=[
@@ -199,7 +199,7 @@ the main page
 
 3. ``update_items`` :  updating items
 
-4. ``go`` :  go to a specific slider
+4. ``go`` :  go to a specific slide
  
 check out the file ``examples/animated_horizontal_basic.py``
 
