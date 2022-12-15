@@ -3,6 +3,16 @@
 This project is a carousel sliders pack with different types for the Flet framework. This project is under development, so in
 the future, different types of sliders will be added to the project.
 
+# Installation
+
+````shell
+pip install fletcarousel
+````
+or 
+````shell
+git clone https://github.com/naderidev/flet-carousel
+````
+
 # How to use
 
 There are some types of sliders, so in the following, we will explain each type of them.
