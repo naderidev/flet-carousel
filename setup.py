@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setuptools.setup(
     name='fletcarousel',
-    version='0.0.9',
+    version='0.0.10',
     license='LICENSE',
     author='naderidev',
     author_email='mohammadrezanaderi84@gmail.com',
