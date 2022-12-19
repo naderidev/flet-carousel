@@ -137,6 +137,9 @@ class BasicHorizontalCarousel(FletCarousel):
                 self.buttons[1].on_click = self.next
 
     def update_items(self, new_items: Optional[list[Control]] = None):
+        self.items = new_items
+        if len(new_items) > 0:
+            self.current_items = (0, self.items_count)
         self.__carousel.controls = self.__controls(new_items)
         self.__carousel.update()
 
