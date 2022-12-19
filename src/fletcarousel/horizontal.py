@@ -1,3 +1,4 @@
+import time
 from typing import Union, Optional
 from flet import *
 from flet.border import Border
@@ -17,6 +18,7 @@ class AutoCycle:
 
 class BasicHorizontalCarousel(FletCarousel):
     current_items: tuple = 0, 0
+    _auto_sycle_status: int = 1  # 1:play 0:pause -1:stop
 
     def __init__(
             self,
@@ -118,6 +120,15 @@ class BasicHorizontalCarousel(FletCarousel):
             self.__item_list.controls = self.items[self.current_items[0]:self.current_items[1]]
         self.page.update(self.__item_list)
 
+    def pause(self):
+        self._auto_sycle_status = 0
+
+    def play(self):
+        self._auto_sycle_status = 1
+
+    def stop(self):
+        self._auto_sycle_status = -1
+
     def __update_buttons(self):
         if self.buttons or len(self.buttons) > 0:
             self.buttons[0].on_click = self.perv
@@ -138,10 +149,14 @@ class BasicHorizontalCarousel(FletCarousel):
         if self.items and self.auto_cycle:
             self.current_items = (0, self.items_count)
             while 1:
-                time.sleep(self.auto_cycle.duration)
-                self.next()
-                if self.current_items[1] == len(self.items):
-                    self.current_items = (0, self.items_count)
+                match self._auto_sycle_status:
+                    case 1:
+                        time.sleep(self.auto_cycle.duration)
+                        self.next()
+                        if self.current_items[1] == len(self.items):
+                            self.current_items = (0, self.items_count)
+                    case -1:
+                        return
 
     def init_state(self):
         self.__auto_cycle()
@@ -156,6 +171,7 @@ class HintLine(BaseModel):
 
 class BasicAnimatedHorizontalCarousel(FletCarousel):
     current_item: int = 0
+    _auto_sycle_status: int = 1  # 1:play 0:pause -1:stop
 
     def __init__(
             self,
@@ -254,15 +270,28 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
                 self.__hint_lines_element.controls[self.current_item].bgcolor = self.hint_lines.active_color
                 self.__hint_lines_element.update()
 
+    def pause(self):
+        self._auto_sycle_status = 0
+
+    def play(self):
+        self._auto_sycle_status = 1
+
+    def stop(self):
+        self._auto_sycle_status = -1
+
     def __auto_cycle(self):
         if self.items and self.auto_cycle:
             self.current_item = 0
             while 1:
-                time.sleep(self.auto_cycle.duration)
-                self.next()
-                if int(self.current_item + 1) == len(self.items):
-                    time.sleep(self.auto_cycle.duration)
-                    self.go(0)
+                match self._auto_sycle_status:
+                    case 1:
+                        time.sleep(self.auto_cycle.duration)
+                        self.next()
+                        if int(self.current_item + 1) == len(self.items):
+                            time.sleep(self.auto_cycle.duration)
+                            self.go(0)
+                    case -1:
+                        return
 
     def update_items(self, new_items: Optional[list[Control]] = None):
         self.items = new_items
