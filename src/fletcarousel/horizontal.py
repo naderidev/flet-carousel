@@ -1,10 +1,6 @@
 import time
 from typing import Union, Optional
 from flet import (
-    PaddingValue,
-    MarginValue,
-    BorderRadiusValue,
-    Gradient, OptionalNumber,
     Border,
     Control,
     Page,
@@ -21,6 +17,12 @@ from flet import (
     Container,
     Column
 )
+from flet_core.gradients import Gradient
+from flet_core.types import (
+    PaddingValue,
+    MarginValue,
+    BorderRadiusValue,
+)
 from .fletcarousel import FletCarousel
 from .attributes import AutoCycle, HintLine
 
@@ -36,9 +38,9 @@ class BasicHorizontalCarousel(FletCarousel):
             items_count: Optional[int] = 1,
             vertical_alignment: CrossAxisAlignment = CrossAxisAlignment.CENTER,
             items_alignment: MainAxisAlignment = MainAxisAlignment.NONE,
-            spacing: OptionalNumber = None,
-            width: OptionalNumber = None,
-            height: OptionalNumber = None,
+            spacing: int = None,
+            width: int = None,
+            height: int = None,
             expand: Union[None, bool, int] = None,
             tooltip: Optional[str] = None,
             visible: Optional[bool] = None,
@@ -188,8 +190,8 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
             self,
             page: Page,
             items: Optional[list[Control]] = None,
-            width: OptionalNumber = None,
-            height: OptionalNumber = None,
+            width: int = None,
+            height: int = None,
             expand: Union[None, bool, int] = None,
             tooltip: Optional[str] = None,
             visible: Optional[bool] = None,

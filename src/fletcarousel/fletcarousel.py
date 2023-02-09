@@ -1,18 +1,19 @@
 import threading
 from typing import Union, Optional
 from flet import (
-    PaddingValue,
-    MarginValue,
-    BorderRadiusValue,
     ClipBehavior,
     Border,
-    OptionalNumber,
     Control,
-    Gradient,
     UserControl,
     Page,
     Alignment,
     Container
+)
+from flet_core.gradients import Gradient
+from flet_core.types import (
+    PaddingValue,
+    MarginValue,
+    BorderRadiusValue,
 )
 
 
@@ -20,8 +21,8 @@ class FletCarousel(UserControl):
     def __init__(
             self,
             page: Page,
-            width: OptionalNumber = None,
-            height: OptionalNumber = None,
+            width: int = None,
+            height: int = None,
             expand: Union[None, bool, int] = None,
             tooltip: Optional[str] = None,
             visible: Optional[bool] = None,
