@@ -1,10 +1,19 @@
 import threading
 from typing import Union, Optional
-from flet import UserControl, Page, Alignment, Container
-from flet.border import Border
-from flet.control import OptionalNumber, Control
-from flet.gradients import Gradient
-from flet.types import PaddingValue, MarginValue, BorderRadiusValue, ClipBehavior
+from flet import (
+    PaddingValue,
+    MarginValue,
+    BorderRadiusValue,
+    ClipBehavior,
+    Border,
+    OptionalNumber,
+    Control,
+    Gradient,
+    UserControl,
+    Page,
+    Alignment,
+    Container
+)
 
 
 class FletCarousel(UserControl):

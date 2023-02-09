@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+src/fletcarousel/__init__.py
+src/fletcarousel/attributes.py
+src/fletcarousel/fletcarousel.py
+src/fletcarousel/horizontal.py
+src/fletcarousel.egg-info/PKG-INFO
+src/fletcarousel.egg-info/SOURCES.txt
+src/fletcarousel.egg-info/dependency_links.txt
+src/fletcarousel.egg-info/top_level.txt

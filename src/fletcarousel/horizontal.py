@@ -1,19 +1,28 @@
 import time
 from typing import Union, Optional
-from flet import *
-from flet.border import Border
-from flet.control import OptionalNumber
-from flet.gradients import Gradient
-from flet.types import PaddingValue, MarginValue, BorderRadiusValue
+from flet import (
+    PaddingValue,
+    MarginValue,
+    BorderRadiusValue,
+    Gradient, OptionalNumber,
+    Border,
+    Control,
+    Page,
+    CrossAxisAlignment,
+    MainAxisAlignment,
+    TextButton,
+    FloatingActionButton,
+    IconButton,
+    Alignment,
+    Row,
+    AnimatedSwitcherTransition,
+    AnimationCurve,
+    AnimatedSwitcher,
+    Container,
+    Column
+)
 from .fletcarousel import FletCarousel
-from pydantic import BaseModel
-
-
-class AutoCycle:
-    duration: int
-
-    def __init__(self, duration: int = 1):
-        self.duration = duration
+from .attributes import AutoCycle, HintLine
 
 
 class BasicHorizontalCarousel(FletCarousel):
@@ -42,7 +51,8 @@ class BasicHorizontalCarousel(FletCarousel):
             border: Optional[Border] = None,
             border_radius: BorderRadiusValue = None,
             auto_cycle: AutoCycle = None,
-            buttons: Optional[list[TextButton | IconButton | FloatingActionButton]] = None,
+            buttons: Optional[list[TextButton |
+                                   IconButton | FloatingActionButton]] = None,
     ):
         FletCarousel.__init__(
             self,
@@ -89,7 +99,8 @@ class BasicHorizontalCarousel(FletCarousel):
 
         self.__item_list = Row(
             controls=[] if len(items) == 0 else (
-                items[0:self.items_count] if len(items) >= self.items_count else items
+                items[0:self.items_count] if len(
+                    items) >= self.items_count else items
             ),
             vertical_alignment=self.vertical_alignment,
             spacing=self.spacing,
@@ -110,13 +121,15 @@ class BasicHorizontalCarousel(FletCarousel):
 
     def next(self, e=None):
         if self.__item_list.controls and self.current_items[1] < len(self.items):
-            self.current_items = self.current_items[0] + 1, self.current_items[1] + 1
+            self.current_items = self.current_items[0] + \
+                1, self.current_items[1] + 1
             self.__item_list.controls = self.items[self.current_items[0]:self.current_items[1]]
         self.page.update(self.__item_list)
 
     def perv(self, e=None):
         if self.__item_list.controls and self.current_items[0] > 0:
-            self.current_items = self.current_items[0] - 1, self.current_items[1] - 1
+            self.current_items = self.current_items[0] - \
+                1, self.current_items[1] - 1
             self.__item_list.controls = self.items[self.current_items[0]:self.current_items[1]]
         self.page.update(self.__item_list)
 
@@ -152,29 +165,24 @@ class BasicHorizontalCarousel(FletCarousel):
         if self.items and self.auto_cycle:
             self.current_items = (0, self.items_count)
             while 1:
-                match self._auto_sycle_status:
-                    case 1:
-                        time.sleep(self.auto_cycle.duration)
-                        self.next()
-                        if self.current_items[1] == len(self.items):
-                            self.current_items = (0, self.items_count)
-                    case -1:
-                        return
+                try:
+                    match self._auto_sycle_status:
+                        case 1:
+                            time.sleep(self.auto_cycle.duration)
+                            self.next()
+                            if self.current_items[1] == len(self.items):
+                                self.current_items = (0, self.items_count)
+                        case -1:
+                            return
+                except:
+                    break
 
     def init_state(self):
         self.__auto_cycle()
 
 
-class HintLine(BaseModel):
-    active_color: Optional[str]
-    inactive_color: Optional[str]
-    alignment: Optional[MainAxisAlignment]
-    max_list_size: Optional[int]
-
-
 class BasicAnimatedHorizontalCarousel(FletCarousel):
     current_item: int = 0
-    _auto_sycle_status: int = 1  # 1:play 0:pause -1:stop
 
     def __init__(
             self,
@@ -223,7 +231,8 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
         self.hint_lines = hint_lines
         self.animated_swicher = animated_swicher
         if animated_swicher and self.items:
-            self.animated_swicher.content = self.items[0] if items else Container()
+            self.animated_swicher.content = self.items[0] if items else Container(
+            )
 
     def render(self) -> Control:
 
@@ -231,15 +240,7 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
 
         if self.hint_lines:
             self.__hint_lines_element = Row(
-                controls=[
-                    Container(
-                        bgcolor=self.hint_lines.active_color if i == 0 else self.hint_lines.inactive_color,
-                        border_radius=20,
-                        width=int(self.hint_lines.max_list_size / len(self.items)),
-                        height=5,
-                        on_click=lambda e, i=i: self.go(i)
-                    ) for i in range(len(self.items))
-                ],
+                controls=self.__hint_lines_elements(),
                 vertical_alignment=CrossAxisAlignment.CENTER,
                 alignment=self.hint_lines.alignment,
                 spacing=10
@@ -251,6 +252,18 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
             spacing=20
         )
 
+    def __hint_lines_elements(self):
+        return [
+            Container(
+                bgcolor=self.hint_lines.active_color if i == 0 else self.hint_lines.inactive_color,
+                border_radius=20,
+                width=int(self.hint_lines.max_list_size /
+                          len(self.items)),
+                height=5,
+                on_click=lambda e, i=i: self.go(i)
+            ) for i in range(len(self.items))
+        ]
+
     def next(self, e=None):
         if self.current_item < len(self.items):
             self.go(self.current_item + 1)
@@ -261,44 +274,40 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
 
     def go(self, index: int):
         if index in range(len(self.items)):
-            self.current_item = index
-            self.animated_swicher.content = self.items[self.current_item]
-            self.animated_swicher.update()
+            try:
+                self.current_item = index
+                self.animated_swicher.content = self.items[self.current_item]
+                self.animated_swicher.update()
 
-            if self.hint_lines:
+                if self.hint_lines:
 
-                for c in self.__hint_lines_element.controls:
-                    c.bgcolor = self.hint_lines.inactive_color
+                    for c in self.__hint_lines_element.controls:
+                        c.bgcolor = self.hint_lines.inactive_color
 
-                self.__hint_lines_element.controls[self.current_item].bgcolor = self.hint_lines.active_color
-                self.__hint_lines_element.update()
-
-    def pause(self):
-        self._auto_sycle_status = 0
-
-    def play(self):
-        self._auto_sycle_status = 1
-
-    def stop(self):
-        self._auto_sycle_status = -1
+                    self.__hint_lines_element.controls[self.current_item].bgcolor = self.hint_lines.active_color
+                    self.__hint_lines_element.update()
+            except:
+                pass
 
     def __auto_cycle(self):
         if self.items and self.auto_cycle:
             self.current_item = 0
             while 1:
-                match self._auto_sycle_status:
-                    case 1:
+                try:
+                    time.sleep(self.auto_cycle.duration)
+                    self.next()
+                    if int(self.current_item + 1) == len(self.items):
                         time.sleep(self.auto_cycle.duration)
-                        self.next()
-                        if int(self.current_item + 1) == len(self.items):
-                            time.sleep(self.auto_cycle.duration)
-                            self.go(0)
-                    case -1:
-                        return
+                        self.go(0)
+                except:
+                    break
 
     def update_items(self, new_items: Optional[list[Control]] = None):
         self.items = new_items
         self.go(0)
+        if self.hint_lines:
+            self.__hint_lines_element.controls = self.__hint_lines_elements()
+            self.__hint_lines_element.update()
 
     def init_state(self):
         self.__auto_cycle()
