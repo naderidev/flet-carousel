@@ -29,7 +29,7 @@ from .attributes import AutoCycle, HintLine
 
 class BasicHorizontalCarousel(FletCarousel):
     current_items: tuple = 0, 0
-    _auto_sycle_status: int = 1  # 1:play 0:pause -1:stop
+    _auto_cycle_status: int = 1  # 1:play 0:pause -1:stop
 
     def __init__(
             self,
@@ -136,13 +136,13 @@ class BasicHorizontalCarousel(FletCarousel):
         self.page.update(self.__item_list)
 
     def pause(self):
-        self._auto_sycle_status = 0
+        self._auto_cycle_status = 0
 
     def play(self):
-        self._auto_sycle_status = 1
+        self._auto_cycle_status = 1
 
     def stop(self):
-        self._auto_sycle_status = -1
+        self._auto_cycle_status = -1
 
     def __update_buttons(self):
         if self.buttons or len(self.buttons) > 0:
@@ -168,7 +168,7 @@ class BasicHorizontalCarousel(FletCarousel):
             self.current_items = (0, self.items_count)
             while 1:
                 try:
-                    match self._auto_sycle_status:
+                    match self._auto_cycle_status:
                         case 1:
                             time.sleep(self.auto_cycle.duration)
                             self.next()
