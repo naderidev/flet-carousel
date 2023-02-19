@@ -128,7 +128,7 @@ class BasicHorizontalCarousel(FletCarousel):
             self.__item_list.controls = self.items[self.current_items[0]:self.current_items[1]]
         self.page.update(self.__item_list)
 
-    def perv(self, e=None):
+    def prev(self, e=None):
         if self.__item_list.controls and self.current_items[0] > 0:
             self.current_items = self.current_items[0] - \
                 1, self.current_items[1] - 1
