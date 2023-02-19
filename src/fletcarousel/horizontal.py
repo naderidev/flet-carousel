@@ -29,7 +29,7 @@ from .attributes import AutoCycle, HintLine
 
 class BasicHorizontalCarousel(FletCarousel):
     current_items: tuple = 0, 0
-    _auto_sycle_status: int = 1  # 1:play 0:pause -1:stop
+    _auto_cycle_status: int = 1  # 1:play 0:pause -1:stop
 
     def __init__(
             self,
