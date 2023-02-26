@@ -206,3 +206,6 @@ the main page
 check out the file ``examples/animated_horizontal_basic.py``
 
 Hope to enjoy :)
+
+# Donating
+- [buy me a coffee](https://www.buymeacoffee.com/mohammadrezaN)
