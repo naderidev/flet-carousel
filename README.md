@@ -187,7 +187,7 @@ the main page
 
 2. ``hint_lines`` : hint lines settings
 
-3. ``animated_swicher`` : The AnimatedSwitcher settings
+3. ``animated_switcher`` : The AnimatedSwitcher settings
 
 4. ``auto_cycle`` : auto cycleing (Auto changing slides)
 

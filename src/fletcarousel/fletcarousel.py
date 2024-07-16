@@ -17,7 +17,7 @@ from flet_core.types import (
 )
 
 
-class FletCarousel(UserControl):
+class FletCarousel(Container):
     def __init__(
             self,
             page: Page,
@@ -50,29 +50,11 @@ class FletCarousel(UserControl):
         self.gradient = gradient
         self.border = border
         self.border_radius = border_radius
-
-    def _build(self):
-        super()._build()
-        threading.Thread(target=self.init_state).start()
+        self.clip_behavior = ClipBehavior.HARD_EDGE,
 
     def build(self):
-        return Container(
-            width=self.width,
-            height=self.height,
-            expand=self.expand,
-            tooltip=self.tooltip,
-            visible=self.visible,
-            disabled=self.disabled,
-            padding=self.padding,
-            margin=self.margin,
-            alignment=self.alignment,
-            bgcolor=self.bgcolor,
-            gradient=self.gradient,
-            border=self.border,
-            border_radius=self.border_radius,
-            clip_behavior=ClipBehavior.HARD_EDGE,
-            content=self.render()
-        )
+        self.content = self.render()
+        threading.Thread(target=self.init_state).start()
 
     def render(self) -> Control:
         return Control()

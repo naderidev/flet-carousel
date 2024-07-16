@@ -146,7 +146,7 @@ class BasicHorizontalCarousel(FletCarousel):
 
     def __update_buttons(self):
         if self.buttons or len(self.buttons) > 0:
-            self.buttons[0].on_click = self.perv
+            self.buttons[0].on_click = self.prev
 
             if len(self.buttons) >= 2:
                 self.buttons[1].on_click = self.next
@@ -232,14 +232,14 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
         self.items = items
         self.auto_cycle = auto_cycle
         self.hint_lines = hint_lines
-        self.animated_swicher = animated_switcher
+        self.animated_switcher = animated_switcher
         if animated_switcher and self.items:
-            self.animated_swicher.content = self.items[0] if items else Container(
+            self.animated_switcher.content = self.items[0] if items else Container(
             )
 
     def render(self) -> Control:
 
-        _controls = [self.animated_swicher]
+        _controls = [self.animated_switcher]
 
         if self.hint_lines:
             self.__hint_lines_element = Row(
@@ -279,8 +279,8 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
         if index in range(len(self.items)):
             try:
                 self.current_item = index
-                self.animated_swicher.content = self.items[self.current_item]
-                self.animated_swicher.update()
+                self.animated_switcher.content = self.items[self.current_item]
+                self.animated_switcher.update()
 
                 if self.hint_lines:
 
