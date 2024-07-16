@@ -37,7 +37,7 @@ class BasicHorizontalCarousel(FletCarousel):
             items: Optional[list[Control]] = None,
             items_count: Optional[int] = 1,
             vertical_alignment: CrossAxisAlignment = CrossAxisAlignment.CENTER,
-            items_alignment: MainAxisAlignment = MainAxisAlignment.NONE,
+            items_alignment: MainAxisAlignment = None,
             spacing: int = None,
             width: int = None,
             height: int = None,
@@ -203,7 +203,8 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
             border_radius: BorderRadiusValue = None,
             auto_cycle: AutoCycle = None,
             hint_lines: Optional[HintLine] = False,
-            animated_swicher: Optional[AnimatedSwitcher] = AnimatedSwitcher(
+            animated_switcher: Optional[AnimatedSwitcher] = AnimatedSwitcher(
+                content=Control(),
                 transition=AnimatedSwitcherTransition.SCALE,
                 duration=500, reverse_duration=100,
                 switch_in_curve=AnimationCurve.BOUNCE_OUT,
@@ -231,8 +232,8 @@ class BasicAnimatedHorizontalCarousel(FletCarousel):
         self.items = items
         self.auto_cycle = auto_cycle
         self.hint_lines = hint_lines
-        self.animated_swicher = animated_swicher
-        if animated_swicher and self.items:
+        self.animated_swicher = animated_switcher
+        if animated_switcher and self.items:
             self.animated_swicher.content = self.items[0] if items else Container(
             )
 
