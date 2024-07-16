@@ -1,7 +1,5 @@
 # Flet simple carousel sliders
 
-![PyPI - Downloads](https://img.shields.io/pypi/dm/fletcarousel)
-
 This project is a carousel sliders pack with different types for the Flet framework. This project is under development, so in
 the future, different types of sliders will be added to the project.
 
@@ -206,3 +204,6 @@ the main page
 check out the file ``examples/animated_horizontal_basic.py``
 
 Hope to enjoy :)
+
+# Donating
+- [buy me a coffee](https://www.buymeacoffee.com/mohammadrezaN)
